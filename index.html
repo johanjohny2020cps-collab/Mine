@@ -250,7 +250,7 @@ button{
 
 <!-- INTRO -->
 <div id="intro">
- <h1>Happy Valentine’s Day 💖</h1>
+ <h1>Happy Valentine’s Day My Lily 💖</h1>
  <div id="countdown"></div>
 
  <input id="nameInput" placeholder="Enter secret code 💌">
@@ -287,12 +287,18 @@ button{
  <h1 class="type" id="type3"></h1>
  <p class="subtitle type" id="type4"></p>
 
- <h3>Us 💕</h3>
+ <h3>Our Cute Memories 💕</h3>
  <div class="photos">
   <!-- Add your own images here -->
   <img class="photo" src="us.JPG" alt="Us 1">
-  <img class="photo" src="us.JPG" alt="Us 2">
-  <img class="photo" src="us.JPG" alt="Us 3">
+  <img class="photo" src="blackdresscake.JPG" alt="Us 2">
+  <img class="photo" src="cake.JPG" alt="Us 4">
+  <img class="photo" src="dancer.JPG" alt="Us 5">
+  <img class="photo" src="noface.jpg" alt="Us 6">
+  <img class="photo" src="snapicons.jpg" alt="Us 7">
+  <img class="photo" src="sofa.jpg" alt="Us 8">
+  <img class="photo" src="snapicons.jpg" alt="Us 9">
+ <img class="photo" src="body.jpg" alt="Us 10">
  </div>
 
  <button id="oneMoreBtn">One more thing…</button>
@@ -308,7 +314,7 @@ button{
 <!-- SECRET CODE MODAL -->
 <div id="codeModal" style="display:none;">
   <div id="modalContent">
-    <p>Hmm… don’t tryna get my wife’s place</p>
+    <p>Hmm, Nadkula idh ente 'OSHEEN LITTLE FLOWERIN Marthram' thorkan pattollu</p>
     <button id="closeModal">OK</button>
   </div>
 </div>
@@ -357,7 +363,7 @@ function typeText(el,text){
 /* ---------- SECRET CODE ---------- */
 openBtn.onclick = () => {
     const code = nameInput.value.trim();
-    const correctCode = "SECRET"; // Change to your desired code
+    const correctCode = "02102024";
 
     if(code === ""){
         codeModal.style.display = "flex";
@@ -373,7 +379,7 @@ openBtn.onclick = () => {
         setTimeout(()=>{
             intro.style.display = "none";
             page1.classList.add("active");
-            typeText(type1, `Will you be my Valentine, ${userName}?`);
+            typeText(type1, `Will you be my Valentine, Lily?`);
         }, 900);
     } else {
         // Wrong code → show fancy modal
@@ -397,7 +403,7 @@ noBtn.onmouseenter=noBtn.onclick=()=>{
 /* ---------- YES ---------- */
 yesBtn.onclick=()=>{
  afterYes.style.display="block";
- typeText(type2,`I knew it 💕 You made me the happiest person ever, ${userName}.`);
+ typeText(type2,`Aww😍, Thank You For Choosing Me as The Valentine Enn Njn Parayula Cuz You're Mine Forever Princess😘, Ms. Johan. `);
 };
 
 /* ---------- RIBBON ---------- */
@@ -409,7 +415,7 @@ function ribbonTransition(cb){
 nextBtn.onclick=()=>ribbonTransition(()=>{
  page1.classList.remove("active");
  page2.classList.add("active");
- typeText(type3,"My favorite person");
+ typeText(type3,"To My favorite person");
  setTimeout(()=>typeText(type4,"You make my world better every single day."),800);
 });
 
