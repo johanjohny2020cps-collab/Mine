@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>My Valentine 💝</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+ font-family:'Quicksand',sans-serif;
+ background:linear-gradient(#ffd6e8,#fff0f6);
+ overflow:hidden;
+ cursor:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='22' font-size='22'>💖</text></svg>"),auto;
+}
+
+/* ---------- INTRO ---------- */
+#intro{
+ position:fixed;inset:0;
+ background:radial-gradient(circle,#ffd1e6,#ff8fb8);
+ display:flex;flex-direction:column;
+ align-items:center;justify-content:center;
+ z-index:30;
+ text-align:center;
+}
+input{
+ padding:12px 18px;
+ border-radius:999px;
+ border:none;
+ font-size:1.1rem;
+ margin-top:15px;
+ text-align:center;
+}
+#hint{
+ margin-top:10px;
+ color:#ff4f87;
+ font-size:0.9rem;
+ font-weight:600;
+}
+
+.envelope{
+ width:230px;height:150px;
+ background:#fff;
+ border-radius:8px;
+ position:relative;
+ overflow:hidden;
+ margin-top:20px;
+}
+.flap{
+ position:absolute;
+ width:0;height:0;
+ border-left:115px solid transparent;
+ border-right:115px solid transparent;
+ border-top:75px solid pink;
+ top:0;left:0;
+ transform-origin:top;
+ transition:1s;
+}
+.flap.open{transform:rotateX(180deg);}
+.seal{
+ position:absolute;
+ width:40px;height:40px;
+ background:#ff4f87;
+ border-radius:50%;
+ top:55%;left:50%;
+ transform:translate(-50%,-50%);
+ transition:.6s;
+}
+.seal.break{opacity:0;transform:translate(-50%,-50%) scale(0);}
+#openBtn{
+ margin-top:18px;
+ background:#ff4f87;color:white;
+ border:none;padding:14px 30px;
+ border-radius:999px;font-size:1.1rem;
+ cursor:pointer;
+}
+
+/* ---------- COUNTDOWN ---------- */
+#countdown{
+ margin-top:10px;
+ color:#b62050;
+ font-weight:600;
+}
+
+/* ---------- MUSIC ---------- */
+#musicToggle{
+ position:fixed;top:12px;left:12px;
+ background:white;padding:8px 14px;
+ border-radius:999px;font-size:.8rem;
+ z-index:15;
+}
+
+/* ---------- RIBBON ---------- */
+.ribbon{
+ position:fixed;inset:0;
+ background:linear-gradient(90deg,#ff6fa4,#ffd6e8,#ff6fa4);
+ z-index:12;
+ transform:translateX(-100%);
+}
+.ribbon.active{animation:slide 1s forwards;}
+@keyframes slide{to{transform:translateX(100%);}}
+
+/* ---------- PAGES ---------- */
+.page{display:none;min-height:100vh;padding:40px 20px;text-align:center;}
+.page.active{display:block;}
+h1{
+ font-family:'Pacifico';
+ color:#ff4f87;
+ text-shadow:0 0 12px rgba(255,80,130,.7);
+}
+.subtitle{color:#c93366;margin-top:8px;}
+.type{min-height:2em;}
+
+/* ---------- LETTER ---------- */
+#letter{
+ position:fixed;
+ bottom:-100%;
+ left:50%;
+ transform:translateX(-50%);
+ background:white;
+ padding:30px;
+ border-radius:20px;
+ width:80%;
+ max-width:380px;
+ box-shadow:0 15px 40px rgba(0,0,0,.3);
+ transition:1s;
+ z-index:25;
+}
+#letter.show{bottom:20%;}
+
+/* ---------- HELLO KITTY IMAGE ---------- */
+.kitty{
+ width:200px;
+ margin:20px auto;
+ filter:drop-shadow(0 0 20px pink);
+}
+
+/* ---------- BUTTONS ---------- */
+.buttons{display:flex;gap:25px;justify-content:center;margin-top:25px;}
+button{
+ border:none;border-radius:999px;
+ padding:14px 30px;
+ background:#ff6fa4;color:white;
+ font-size:1.1rem;cursor:pointer;
+ transition:.3s;
+}
+#yesBtn{animation:pulse 2s infinite;}
+@keyframes pulse{50%{transform:scale(1.2);}}
+
+/* ---------- EFFECTS ---------- */
+.rose{position:fixed;top:-40px;font-size:22px;animation:fall linear infinite;}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);} }
+.balloon{position:fixed;bottom:-60px;font-size:30px;animation:floatUp linear infinite;}
+@keyframes floatUp{to{transform:translateY(-120vh);} }
+.sparkle{
+ position:fixed;
+ pointer-events:none;
+ font-size:14px;
+ animation:sparkleFade 1s forwards;
+ z-index:9999;
+}
+@keyframes sparkleFade{
+ to{opacity:0;transform:scale(2) translateY(-20px);}
+}
+.flower{position:fixed;font-size:40px;animation:bloom 1.5s forwards;}
+@keyframes bloom{from{transform:scale(0);}to{transform:scale(1.5);} }
+.side-link{
+ position:fixed;right:10px;top:50%;
+ background:pink;padding:10px 16px;
+ border-radius:999px;cursor:pointer;
+ display:none;
+}
+
+/* ---------- PHOTO GALLERY ---------- */
+.photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 15px;
+  justify-items: center;
+  margin: 20px 0;
+}
+.photos .photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(255,80,130,0.4);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+.photos .photo:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 25px rgba(255,80,130,0.6);
+}
+
+/* ---------- MODAL ---------- */
+#codeModal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+#modalContent {
+  background: #ffeff5;
+  padding: 30px 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,.3);
+  animation: popIn 0.3s ease forwards;
+}
+#modalContent p {
+  font-size: 1.2rem;
+  color: #ff4f87;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+#modalContent button {
+  padding: 10px 25px;
+  border: none;
+  border-radius: 999px;
+  background: #ff4f87;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#modalContent button:hover { transform: scale(1.1);}
+@keyframes popIn {0%{transform:scale(0);}100%{transform:scale(1);}}
+</style>
+</head>
+<body>
+
+<audio id="music" loop>
+<source src="https://cdn.pixabay.com/download/audio/2023/03/02/audio_6b6c0a62db.mp3">
+</audio>
+
+<div id="musicToggle">🎵 Play music</div>
+<div class="ribbon" id="ribbon"></div>
+
+<!-- LETTER -->
+<div id="letter">
+ <h2>My Valentine 💕</h2>
+ <p id="letterText"></p>
+</div>
+
+<!-- INTRO -->
+<div id="intro">
+ <h1>Happy Valentine’s Day 💖</h1>
+ <div id="countdown"></div>
+
+ <input id="nameInput" placeholder="Enter secret code 💌">
+ <div id="hint">Hint: Date</div>
+
+ <div class="envelope">
+  <div class="flap" id="flap"></div>
+  <div class="seal" id="seal"></div>
+ </div>
+
+ <button id="openBtn">Open My Gift 💌</button>
+</div>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+ <h1 class="type" id="type1"></h1>
+
+ <img class="kitty"
+ src="https://upload.wikimedia.org/wikipedia/en/0/05/Hello_kitty_character_portrait.png">
+
+ <div class="buttons">
+  <button id="yesBtn">YES 💖</button>
+  <button id="noBtn">NO 😏</button>
+ </div>
+
+ <div id="afterYes" style="display:none;">
+  <h2 class="type" id="type2"></h2><br>
+  <button id="nextBtn">Next →</button>
+ </div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+ <h1 class="type" id="type3"></h1>
+ <p class="subtitle type" id="type4"></p>
+
+ <h3>Us 💕</h3>
+ <div class="photos">
+  <!-- Add your own images here -->
+  <img class="photo" src="us.JPG" alt="Us 1">
+  <img class="photo" src="us.JPG" alt="Us 2">
+  <img class="photo" src="us.JPG" alt="Us 3">
+ </div>
+
+ <button id="oneMoreBtn">One more thing…</button>
+
+ <div class="side-link" id="backBtn">Back to first page 🎀</div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:9999;">
+  <img id="lightboxImg" src="" style="max-width:90%;max-height:90%;border-radius:15px;">
+</div>
+
+<!-- SECRET CODE MODAL -->
+<div id="codeModal" style="display:none;">
+  <div id="modalContent">
+    <p>Hmm… don’t tryna get my wife’s place</p>
+    <button id="closeModal">OK</button>
+  </div>
+</div>
+
+<script>
+let userName="";
+
+/* ---------- COUNTDOWN ---------- */
+function updateCountdown(){
+ const now=new Date();
+ let val=new Date(now.getFullYear(),1,14);
+ if(now>val) val.setFullYear(val.getFullYear()+1);
+ const diff=val-now;
+ countdown.innerText=`${Math.floor(diff/86400000)} days until Valentine’s 💕`;
+}
+setInterval(updateCountdown,1000);updateCountdown();
+
+/* ---------- FIREWORK CLICK ---------- */
+document.addEventListener("click",e=>{
+ for(let i=0;i<12;i++){
+  const s=document.createElement("div");
+  s.className="sparkle";
+  s.innerHTML="💖";
+  s.style.left=e.clientX+"px";
+  s.style.top=e.clientY+"px";
+  document.body.appendChild(s);
+  setTimeout(()=>s.remove(),1000);
+ }
+});
+
+/* ---------- MUSIC ---------- */
+musicToggle.onclick=()=>{
+ if(music.paused){music.play();musicToggle.innerText="🔇 Pause music";}
+ else{music.pause();musicToggle.innerText="🎵 Play music";}
+};
+
+/* ---------- TYPING ---------- */
+function typeText(el,text){
+ let i=0;el.innerHTML="";
+ let t=setInterval(()=>{
+  el.innerHTML+=text[i++];
+  if(i>=text.length)clearInterval(t);
+ },60);
+}
+
+/* ---------- SECRET CODE ---------- */
+openBtn.onclick = () => {
+    const code = nameInput.value.trim();
+    const correctCode = "SECRET"; // Change to your desired code
+
+    if(code === ""){
+        codeModal.style.display = "flex";
+        flap.style.transform = "rotateX(-15deg)";
+        setTimeout(() => { flap.style.transform = ""; }, 300);
+        flap.classList.remove("open");
+        seal.classList.remove("break");
+    } else if(code === correctCode){
+        userName = code;
+        seal.classList.add("break");
+        flap.classList.add("open");
+
+        setTimeout(()=>{
+            intro.style.display = "none";
+            page1.classList.add("active");
+            typeText(type1, `Will you be my Valentine, ${userName}?`);
+        }, 900);
+    } else {
+        // Wrong code → show fancy modal
+        codeModal.style.display = "flex";
+        flap.style.transform = "rotateX(-15deg)";
+        setTimeout(() => { flap.style.transform = ""; }, 300);
+        flap.classList.remove("open");
+        seal.classList.remove("break");
+    }
+};
+
+document.getElementById("closeModal").onclick = () => {
+    codeModal.style.display = "none";
+};
+
+/* ---------- NO BUTTON ---------- */
+noBtn.onmouseenter=noBtn.onclick=()=>{
+ noBtn.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
+};
+
+/* ---------- YES ---------- */
+yesBtn.onclick=()=>{
+ afterYes.style.display="block";
+ typeText(type2,`I knew it 💕 You made me the happiest person ever, ${userName}.`);
+};
+
+/* ---------- RIBBON ---------- */
+function ribbonTransition(cb){
+ ribbon.classList.add("active");
+ setTimeout(()=>{ribbon.classList.remove("active");cb();},1000);
+}
+
+nextBtn.onclick=()=>ribbonTransition(()=>{
+ page1.classList.remove("active");
+ page2.classList.add("active");
+ typeText(type3,"My favorite person");
+ setTimeout(()=>typeText(type4,"You make my world better every single day."),800);
+});
+
+/* ---------- LETTER ---------- */
+oneMoreBtn.onclick=()=>{
+ letter.classList.add("show");
+ letterText.innerText=
+ `Kunjipenn,\n\nHappy Valentine’s Day 💖  
+You mean more to me than words can say.  
+Thank you for making my life brighter, sweeter, and full of love.  
+I choose you today and always.\n\nForever yours 💕`;
+
+ backBtn.style.display="block";
+};
+
+/* ---------- BACK ---------- */
+backBtn.onclick=()=>ribbonTransition(()=>{
+ page2.classList.remove("active");
+ page1.classList.add("active");
+});
+
+/* ---------- PHOTO GALLERY LIGHTBOX ---------- */
+document.querySelectorAll('.photos .photo').forEach(img => {
+  img.onclick = () => {
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').style.display = 'flex';
+  };
+});
+document.getElementById('lightbox').onclick = () => {
+  document.getElementById('lightbox').style.display = 'none';
+};
+</script>
+
+</body>
+</html>
